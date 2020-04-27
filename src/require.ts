@@ -3,7 +3,7 @@ import { Files } from './bundle'
 import { EvaluateModule } from './module'
 
 export function createRequire (basedir: string, files: Files, evaluateModule: EvaluateModule): NodeJS.Require {
-  const nativeRequire = NativeModule.createRequire(basedir)
+  const nativeRequire = NativeModule.createRequire ? NativeModule.createRequire(basedir) : require
 
   const resolveFromFiles = function (id: string) {
     const _id = id.replace(/^\.\//, '')
@@ -32,6 +32,9 @@ export function createRequire (basedir: string, files: Files, evaluateModule: Ev
   _require.resolve = _resolve
   _require.cache = {}
   _require.main = undefined
+
+  // require.extensions was deprecated since v0.12.0
+  // eslint-disable-next-line node/no-deprecated-api
   _require.extensions = nativeRequire.extensions
 
   return _require

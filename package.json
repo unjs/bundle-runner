@@ -1,7 +1,7 @@
 {
   "name": "bundle-runner",
   "version": "0.0.0",
-  "description": "",
+  "description": "run webpack bundles in Node.js with optional VM sandboxing",
   "repository": "nuxt-contrib/bundle-runner",
   "license": "MIT",
   "main": "./dist/bundle-runner.cjs.js",

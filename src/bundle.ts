@@ -13,9 +13,7 @@ export type Bundle = {
   maps: { [filename: string]: string }
 }
 
-export type RawBundle = Bundle | string
-
-function loadBundle (bundle: Partial<RawBundle>, basedir?: string): Bundle {
+function loadBundle (bundle: Partial<Bundle> | string, basedir?: string): Bundle {
   let bundleFile = 'bundle.js'
 
   // Load bundle if given filepath
@@ -69,7 +67,7 @@ function loadBundle (bundle: Partial<RawBundle>, basedir?: string): Bundle {
   return bundle as Bundle
 }
 
-export function createBundle (_bundle: Partial<RawBundle>, options: CreateBundleOptions = {}) {
+export function createBundle (_bundle: Partial<Bundle> | string, options: CreateBundleOptions = {}) {
   const bundle = loadBundle(_bundle, options.basedir)
 
   const evaluateModule = createEvaluateModule(bundle.files, options)
