@@ -4,7 +4,10 @@ import typescript from '@rollup/plugin-typescript'
 export default [
   {
     input: './src/index.ts',
-    external: NativeModule.builtinModules,
+    external: [
+      ...NativeModule.builtinModules,
+      'source-map'
+    ],
     output: [
       { file: './dist/bundle-runner.cjs.js', format: 'cjs' },
       { file: './dist/bundle-runner.esm.js', format: 'esm' }

@@ -19,6 +19,9 @@
     "test": "yarn lint && yarn jest",
     "types": "tsc --declarationDir types --declaration --emitDeclarationOnly"
   },
+  "dependencies": {
+    "source-map": "^0.7.3"
+  },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "latest",
     "@rollup/plugin-typescript": "latest",

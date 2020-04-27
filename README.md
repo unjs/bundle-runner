@@ -46,6 +46,7 @@ function createBundle(bundle: Partial<Bundle> | string, options?: CreateBundleOp
     bundle: Bundle;
     evaluateEntry: (context: object) => any;
     evaluateModule: (filename: string, context: object) => any;
+    rewriteErrorTrace: (err: Error) => Promise<Error>;
 }
 ```
 
@@ -73,6 +74,22 @@ type Bundle = {
     maps: {
         [filename: string]: string
     };
+}
+```
+
+### SourceMap Support
+
+After creating bundle, a `rewriteErrorTrace` utility is exposed which you can use to rewrite traces:
+
+```ts
+const { evaluateEntry, rewriteErrorTrace } = createBundle('path/to/bundle.json')
+
+try {
+  const entry = evaluateEntry(context)
+  const app = await entry({})
+} catch (err) {
+  await rewriteErrorTrace(err)
+  throw err
 }
 ```
 

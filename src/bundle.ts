@@ -1,6 +1,7 @@
 import { isAbsolute, dirname } from 'path'
 import fs from 'fs'
 import { CreateEvaluateOptions, createEvaluateModule } from './module'
+import { createSourceMap } from './source-map'
 
 export type Files = { [name: string]: any }
 
@@ -69,6 +70,7 @@ function loadBundle (bundle: Partial<Bundle> | string, basedir?: string): Bundle
 
 export function createBundle (_bundle: Partial<Bundle> | string, options: CreateBundleOptions = {}) {
   const bundle = loadBundle(_bundle, options.basedir)
+  const { rewriteErrorTrace } = createSourceMap(bundle.maps)
 
   const evaluateModule = createEvaluateModule(bundle.files, options)
 
@@ -79,6 +81,7 @@ export function createBundle (_bundle: Partial<Bundle> | string, options: Create
   return {
     bundle,
     evaluateModule,
-    evaluateEntry
+    evaluateEntry,
+    rewriteErrorTrace
   }
 }
