@@ -20,7 +20,7 @@
     "types": "tsc --declarationDir types --declaration --emitDeclarationOnly"
   },
   "dependencies": {
-    "source-map": "^0.7.3"
+    "source-map": "^0.7.4"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "latest",
